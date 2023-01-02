@@ -1,0 +1,10 @@
+server:
+  port: 49999
+
+spring:
+  profiles:
+    active: dev
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+
