@@ -4,3 +4,9 @@ spring:
     url: jdbc:mysql://localhost:43306/painting-diary
     username: root
     password: root
+
+logging:
+  level:
+    root: debug
+
+frontend-url: ${FRONTEND_URL:http://localhost:33000}
