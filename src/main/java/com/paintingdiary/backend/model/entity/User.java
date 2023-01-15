@@ -1,12 +1,12 @@
 package com.paintingdiary.backend.model.entity;
 
 import com.paintingdiary.backend.model.enums.UserType;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.lang.Nullable;
 
-import jakarta.persistence.*;
 import java.time.Instant;
 import java.util.Objects;
 
@@ -17,7 +17,7 @@ import java.util.Objects;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     @Column(unique = true, nullable = false)
     private String uid;
     @Column(unique = true, nullable = false)
