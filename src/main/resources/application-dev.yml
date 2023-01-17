@@ -8,5 +8,3 @@ spring:
 logging:
   level:
     root: debug
-
-frontend-url: ${FRONTEND_URL:http://localhost:33000}
