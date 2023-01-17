@@ -1,41 +1,40 @@
 package com.paintingdiary.backend.model.entity;
 
-import com.paintingdiary.backend.model.enums.UserType;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.lang.Nullable;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
 @Setter
 @Entity
-@NoArgsConstructor
-public class User {
+public class UserCharacter {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(unique = true, nullable = false)
-    private String uid;
-    @Column(unique = true, nullable = false)
+    private Long uid;
+
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private User user;
+
+    @Column(nullable = false)
     private String nickname;
     @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private UserType type;
+    private String description;
+    private @Nullable String link;
+
+    @Transient
+    private List<Skill> skillList = new ArrayList<>();
 
     @Column(nullable = false)
     private Instant createDt;
     @Column(nullable = false)
     private Instant updateDt;
-
-    public User(String uid, @Nullable String nickname, UserType type) {
-        this.uid = uid;
-        this.nickname = nickname;
-        this.type = type;
-    }
 
     @PrePersist
     void preInsert() {
@@ -51,9 +50,5 @@ public class User {
     @PreUpdate
     void preUpdate() {
         this.updateDt = Instant.now();
-    }
-
-    public boolean isBlock() {
-        return type == UserType.BLOCK;
     }
 }

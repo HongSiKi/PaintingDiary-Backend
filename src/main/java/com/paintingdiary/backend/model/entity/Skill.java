@@ -1,11 +1,9 @@
 package com.paintingdiary.backend.model.entity;
 
-import com.paintingdiary.backend.model.enums.UserType;
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.lang.Nullable;
+import org.springframework.util.ObjectUtils;
 
 import java.time.Instant;
 import java.util.Objects;
@@ -13,29 +11,26 @@ import java.util.Objects;
 @Getter
 @Setter
 @Entity
-@NoArgsConstructor
-public class User {
+public class Skill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(unique = true, nullable = false)
-    private String uid;
-    @Column(unique = true, nullable = false)
-    private String nickname;
+
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private UserCharacter character;
+
     @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private UserType type;
+    private String title;
+    @Column(nullable = false)
+    private String description;
+    @Column(nullable = false)
+    private int progress;
 
     @Column(nullable = false)
     private Instant createDt;
     @Column(nullable = false)
     private Instant updateDt;
-
-    public User(String uid, @Nullable String nickname, UserType type) {
-        this.uid = uid;
-        this.nickname = nickname;
-        this.type = type;
-    }
 
     @PrePersist
     void preInsert() {
@@ -53,7 +48,21 @@ public class User {
         this.updateDt = Instant.now();
     }
 
-    public boolean isBlock() {
-        return type == UserType.BLOCK;
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, description);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Skill other)) {
+            return false;
+        }
+
+        boolean isSameTitle = ObjectUtils.nullSafeEquals(title, other.getTitle());
+        boolean isSameDescription = ObjectUtils.nullSafeEquals(description, other.getDescription());
+
+        return isSameTitle && isSameDescription;
     }
 }
+

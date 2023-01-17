@@ -26,6 +26,7 @@ public class Auth {
     @Enumerated(EnumType.STRING)
     private AuthProvider provider;
     private @Nullable String encryptedPassword;
+
     @Column(nullable = false)
     private Instant createDt;
     @Column(nullable = false)

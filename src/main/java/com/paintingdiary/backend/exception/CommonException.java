@@ -18,6 +18,7 @@ public class CommonException extends BaseException {
     public static CommonException ALREADY_REGISTERED_USER = new CommonException(HttpStatus.CONFLICT, "ALREADY_REGISTERED_USER");
     public static CommonException ALREADY_REGISTERED_NICKNAME = new CommonException(HttpStatus.CONFLICT, "ALREADY_REGISTERED_NICKNAME");
     public static CommonException ALREADY_REGISTERED_EMAIL = new CommonException(HttpStatus.CONFLICT, "ALREADY_REGISTERED_EMAIL");
+    public static CommonException ALREADY_REGISTERED_CHARACTER = new CommonException(HttpStatus.CONFLICT, "ALREADY_REGISTERED_CHARACTER");
     public static CommonException INVALID_PROVIDER = new CommonException(HttpStatus.BAD_REQUEST, "INVALID_PROVIDER");
     public static CommonException INVALID_PARAMETER = new CommonException(HttpStatus.BAD_REQUEST, "INVALID_PARAMETER");
     public static CommonException MISSING_PARAMETER = new CommonException(HttpStatus.BAD_REQUEST, "MISSING_PARAMETER");
