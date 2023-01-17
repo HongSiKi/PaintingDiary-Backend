@@ -2,7 +2,6 @@ package com.paintingdiary.backend.annotation.resolver;
 
 import com.paintingdiary.backend.annotation.AuthResult;
 import com.paintingdiary.backend.exception.CommonException;
-import com.paintingdiary.backend.model.dto.UserDTO;
 import com.paintingdiary.backend.model.entity.Auth;
 import com.paintingdiary.backend.model.entity.User;
 import com.paintingdiary.backend.service.UserService;
@@ -31,7 +30,7 @@ public class AuthResultResolver implements HandlerMethodArgumentResolver {
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
         return parameter.getParameterAnnotation(AuthResult.class) != null &&
-                parameter.getParameterType().equals(UserDTO.class);
+                parameter.getParameterType().equals(User.class);
     }
 
     @Override
@@ -47,8 +46,8 @@ public class AuthResultResolver implements HandlerMethodArgumentResolver {
                 .flatMap(authService::getAuthByUid)
                 .orElse(null);
 
-        if(Objects.isNull(auth)) {
-            if(authResult.isRequired()) {
+        if (Objects.isNull(auth)) {
+            if (authResult.isRequired()) {
                 throw CommonException.UNAUTHORIZED;
             } else {
                 return null;
@@ -58,15 +57,15 @@ public class AuthResultResolver implements HandlerMethodArgumentResolver {
         User user = userService.getUserByUid(auth.getUid())
                 .orElse(null);
 
-        if(Objects.isNull(user)) {
-            if(authResult.isRequired()) {
+        if (Objects.isNull(user)) {
+            if (authResult.isRequired()) {
                 throw CommonException.UNAUTHORIZED;
             }
         } else {
-            if(user.isBlock()) {
+            if (user.isBlock()) {
                 throw CommonException.FORBIDDEN;
             }
-            return new UserDTO(user.getUid(), user.getNickname(), user.getType());
+            return user;
         }
 
         return null;
