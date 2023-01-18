@@ -2,7 +2,7 @@ package com.paintingdiary.backend.controller;
 
 import com.paintingdiary.backend.annotation.AuthResult;
 import com.paintingdiary.backend.model.dto.BaseResponse;
-import com.paintingdiary.backend.model.dto.UserDTO;
+import com.paintingdiary.backend.model.entity.User;
 import com.paintingdiary.backend.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,8 +19,8 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping
-    public BaseResponse me(@AuthResult UserDTO userDTO) {
-        return BaseResponse.of(userDTO);
+    public BaseResponse me(@AuthResult User user) {
+        return BaseResponse.of(user);
     }
 
 
