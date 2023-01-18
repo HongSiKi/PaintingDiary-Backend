@@ -19,7 +19,7 @@ public record CharacterDTO(
         }
 
         return new CharacterDTO(
-                UserDTO.of(character.getUser()),
+                UserDTO.of(character.getUser(), true),
                 character.getNickname(),
                 character.getDescription(),
                 character.getLink(),

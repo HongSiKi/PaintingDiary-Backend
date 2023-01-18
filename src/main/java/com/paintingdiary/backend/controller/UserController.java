@@ -4,6 +4,7 @@ import com.paintingdiary.backend.annotation.AuthResult;
 import com.paintingdiary.backend.model.dto.BaseResponse;
 import com.paintingdiary.backend.model.dto.UserDTO;
 import com.paintingdiary.backend.model.entity.User;
+import com.paintingdiary.backend.service.CharacterService;
 import com.paintingdiary.backend.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,10 +19,13 @@ import java.util.Map;
 @RestController
 public class UserController {
     private final UserService userService;
+    private final CharacterService characterService;
 
     @GetMapping
     public BaseResponse me(@AuthResult User user) {
-        return BaseResponse.of(UserDTO.of(user));
+        boolean hasCharacter = characterService.hasCharacter(user);
+
+        return BaseResponse.of(UserDTO.of(user, hasCharacter));
     }
 
 

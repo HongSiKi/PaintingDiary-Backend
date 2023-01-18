@@ -146,4 +146,8 @@ public class CharacterService {
 
         return character;
     }
+
+    public boolean hasCharacter(User user) {
+        return characterRepository.findByUser(user).isPresent();
+    }
 }
