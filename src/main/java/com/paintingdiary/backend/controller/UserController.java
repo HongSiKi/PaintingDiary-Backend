@@ -2,6 +2,7 @@ package com.paintingdiary.backend.controller;
 
 import com.paintingdiary.backend.annotation.AuthResult;
 import com.paintingdiary.backend.model.dto.BaseResponse;
+import com.paintingdiary.backend.model.dto.UserDTO;
 import com.paintingdiary.backend.model.entity.User;
 import com.paintingdiary.backend.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,7 @@ public class UserController {
 
     @GetMapping
     public BaseResponse me(@AuthResult User user) {
-        return BaseResponse.of(user);
+        return BaseResponse.of(UserDTO.of(user));
     }
 
 
