@@ -62,6 +62,11 @@ public class CharacterService {
                     throw CommonException.ALREADY_REGISTERED_CHARACTER;
                 });
 
+        characterRepository.findByNickname(createRequest.getNickname())
+                .ifPresent(ignored -> {
+                    throw CommonException.ALREADY_REGISTERED_NICKNAME;
+                });
+
         UserCharacter character = new UserCharacter();
         character.setUser(user);
         character.setNickname(createRequest.getNickname());
@@ -95,6 +100,11 @@ public class CharacterService {
                 .orElseThrow(() -> CommonException.ITEM_NOT_FOUND);
 
         if (updateRequest.getNickname() != null) {
+            characterRepository.findByNickname(updateRequest.getNickname())
+                    .ifPresent(ignored -> {
+                        throw CommonException.ALREADY_REGISTERED_NICKNAME;
+                    });
+
             character.setNickname(updateRequest.getNickname());
         }
 
@@ -149,5 +159,9 @@ public class CharacterService {
 
     public boolean hasCharacter(User user) {
         return characterRepository.findByUser(user).isPresent();
+    }
+
+    public boolean isDuplicatedNickname(String nickname) {
+        return characterRepository.findByNickname(nickname).isPresent();
     }
 }

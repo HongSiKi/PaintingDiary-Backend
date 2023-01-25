@@ -9,10 +9,7 @@ import com.paintingdiary.backend.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Map;
 
 @RequestMapping("/api/users")
 @RequiredArgsConstructor
@@ -28,11 +25,4 @@ public class UserController {
         return BaseResponse.of(UserDTO.of(user, hasCharacter));
     }
 
-
-    @GetMapping("/nickname")
-    public BaseResponse isDuplicatedNickname(@RequestParam String nickname) {
-        boolean isDuplicated = userService.isDuplicatedNickname(nickname);
-
-        return BaseResponse.of(Map.of("duplicated", isDuplicated));
-    }
 }

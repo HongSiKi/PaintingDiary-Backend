@@ -13,12 +13,21 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RequestMapping("/api/characters")
 @RestController
 @RequiredArgsConstructor
 public class CharacterController {
 
     private final CharacterService characterService;
+
+    @GetMapping("/nickname")
+    public BaseResponse isDuplicatedNickname(@RequestParam String nickname) {
+        boolean isDuplicated = characterService.isDuplicatedNickname(nickname);
+
+        return BaseResponse.of(Map.of("duplicated", isDuplicated));
+    }
 
     @GetMapping
     public BaseResponse getCharacter(@RequestParam(defaultValue = "false") boolean me, @RequestParam(defaultValue = "0") int page, @AuthResult(isRequired = false) User user) {
