@@ -6,7 +6,7 @@ spring:
     active: dev
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: none
     database-platform: org.hibernate.dialect.MySQL8Dialect
   mvc:
     throw-exception-if-no-handler-found: true

@@ -12,7 +12,6 @@ import java.util.List;
 @Setter
 public class CharacterCreateRequestDTO {
     private @NotBlank String nickname;
-    private @NotBlank String description;
     private String link;
     private List<@Valid SkillCreateRequestDTO> skillList = Collections.emptyList();
 }
