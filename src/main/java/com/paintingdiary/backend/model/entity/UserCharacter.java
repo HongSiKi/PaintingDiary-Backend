@@ -24,8 +24,6 @@ public class UserCharacter {
 
     @Column(nullable = false)
     private String nickname;
-    @Column(nullable = false)
-    private String description;
     private @Nullable String link;
 
     @Transient

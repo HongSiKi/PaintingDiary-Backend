@@ -9,7 +9,6 @@ import java.util.List;
 public record CharacterDTO(
         UserDTO user,
         String nickname,
-        String description,
         @Nullable String link,
         List<SkillDTO> skillList
 ) {
@@ -21,7 +20,6 @@ public record CharacterDTO(
         return new CharacterDTO(
                 UserDTO.of(character.getUser(), true),
                 character.getNickname(),
-                character.getDescription(),
                 character.getLink(),
                 character.getSkillList().stream().map(SkillDTO::of).toList()
         );

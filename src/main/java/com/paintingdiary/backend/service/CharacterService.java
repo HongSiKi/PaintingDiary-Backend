@@ -71,7 +71,6 @@ public class CharacterService {
         UserCharacter character = new UserCharacter();
         character.setUser(user);
         character.setNickname(createRequest.getNickname());
-        character.setDescription(createRequest.getDescription());
         character.setLink(createRequest.getLink());
         characterRepository.save(character);
 
@@ -107,10 +106,6 @@ public class CharacterService {
                     });
 
             character.setNickname(updateRequest.getNickname());
-        }
-
-        if (updateRequest.getDescription() != null && !updateRequest.getDescription().isBlank()) {
-            character.setDescription(updateRequest.getDescription());
         }
 
         if (updateRequest.getLink() != null && !updateRequest.getLink().isBlank()) {

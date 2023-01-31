@@ -11,7 +11,6 @@ import java.util.List;
 @Setter
 public class CharacterUpdateRequestDTO {
     private String nickname;
-    private String description;
     private String link;
     private List<@Valid SkillUpdateRequestDTO> skillList = Collections.emptyList();
 }
