@@ -3,6 +3,7 @@ package com.paintingdiary.backend.exception;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.paintingdiary.backend.model.dto.BaseResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.AuthenticationException;
@@ -37,7 +38,7 @@ public class BaseExceptionHandler {
     @ExceptionHandler({MethodArgumentNotValidException.class, MultipartException.class})
     public BaseResponse invalidParameter(Exception e) {
         log.debug("[invalidParameter]: {}", e.getMessage());
-        return BaseResponse.exception(CommonException.INVALID_PARAMETER);
+        return BaseResponse.exception(new CommonException(HttpStatus.BAD_REQUEST, e.getMessage()));
     }
 
     @ExceptionHandler({BaseException.class})

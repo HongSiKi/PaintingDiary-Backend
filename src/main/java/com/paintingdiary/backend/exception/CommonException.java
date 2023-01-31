@@ -9,7 +9,7 @@ public class CommonException extends BaseException {
     private final HttpStatus status;
     private final String errorDescription;
 
-    private CommonException(HttpStatus status, String errorDescription) {
+    public CommonException(HttpStatus status, String errorDescription) {
         super(errorDescription);
         this.status = status;
         this.errorDescription = errorDescription;
