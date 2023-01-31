@@ -57,15 +57,16 @@ public class CharacterService {
     }
 
     public UserCharacter createCharacter(User user, CharacterCreateRequestDTO createRequest) {
-        characterRepository.findByUser(user)
-                .ifPresent(ignored -> {
-                    throw CommonException.ALREADY_REGISTERED_CHARACTER;
-                });
+        // TODO: 추후 제약 조건 활성화
+//        characterRepository.findByUser(user)
+//                .ifPresent(ignored -> {
+//                    throw CommonException.ALREADY_REGISTERED_CHARACTER;
+//                });
 
-        characterRepository.findByNickname(createRequest.getNickname())
-                .ifPresent(ignored -> {
-                    throw CommonException.ALREADY_REGISTERED_NICKNAME;
-                });
+//        characterRepository.findByNickname(createRequest.getNickname())
+//                .ifPresent(ignored -> {
+//                    throw CommonException.ALREADY_REGISTERED_NICKNAME;
+//                });
 
         UserCharacter character = new UserCharacter();
         character.setUser(user);
@@ -99,7 +100,7 @@ public class CharacterService {
         UserCharacter character = characterRepository.findByUser(user)
                 .orElseThrow(() -> CommonException.ITEM_NOT_FOUND);
 
-        if (updateRequest.getNickname() != null) {
+        if (updateRequest.getNickname() != null && !updateRequest.getNickname().isBlank()) {
             characterRepository.findByNickname(updateRequest.getNickname())
                     .ifPresent(ignored -> {
                         throw CommonException.ALREADY_REGISTERED_NICKNAME;
@@ -108,11 +109,11 @@ public class CharacterService {
             character.setNickname(updateRequest.getNickname());
         }
 
-        if (updateRequest.getDescription() != null) {
+        if (updateRequest.getDescription() != null && !updateRequest.getDescription().isBlank()) {
             character.setDescription(updateRequest.getDescription());
         }
 
-        if (updateRequest.getLink() != null) {
+        if (updateRequest.getLink() != null && !updateRequest.getLink().isBlank()) {
             character.setLink(updateRequest.getLink());
         }
 
