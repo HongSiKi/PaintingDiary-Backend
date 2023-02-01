@@ -20,9 +20,9 @@ public class UserController {
 
     @GetMapping
     public BaseResponse me(@AuthResult User user) {
-        boolean hasCharacter = characterService.hasCharacter(user);
+//        boolean hasCharacter = characterService.hasCharacter(user);
 
-        return BaseResponse.of(UserDTO.of(user, hasCharacter));
+        return BaseResponse.of(UserDTO.of(user, false));
     }
 
 }
