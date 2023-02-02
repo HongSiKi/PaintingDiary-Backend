@@ -63,10 +63,10 @@ public class CharacterService {
 //                    throw CommonException.ALREADY_REGISTERED_CHARACTER;
 //                });
 
-//        characterRepository.findByNickname(createRequest.getNickname())
-//                .ifPresent(ignored -> {
-//                    throw CommonException.ALREADY_REGISTERED_NICKNAME;
-//                });
+        characterRepository.findByNickname(createRequest.getNickname())
+                .ifPresent(ignored -> {
+                    throw CommonException.ALREADY_REGISTERED_NICKNAME;
+                });
 
         UserCharacter character = new UserCharacter();
         character.setUser(user);
